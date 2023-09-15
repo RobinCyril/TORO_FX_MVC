@@ -1,0 +1,262 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.bgcolor{
+    background-color: #061921;
+    margin-top: 10px;
+}
+.topMenu{
+    display: flex;
+    margin-top: 10px;
+    height: 70px;
+    /* border: 2px solid red; */
+}
+.nav{
+    display: flex;
+    /* align-items: center; */
+   
+}
+
+
+.logo img{
+    width: 150px;
+    height: 50px;
+    /* border: 2px solid red; */
+}
+
+.nav .searchBox{
+    border: 2px solid grey;
+    border-radius: 10px;
+}
+
+.nav .icon{
+    margin-left: 400px;
+    margin-top: 10px;
+}
+
+
+
+.profile img{
+    position: relative; left: 50px; top: 10px;
+    border: 2px solid white;
+    border-radius: 70px;
+    height: 50px;
+    width: 50px;
+}
+.sideTab{
+    display: flex;
+}
+.sideTab ul li{
+    list-style-type: none;
+    color: white;
+
+}
+.main{
+    color:white;
+   
+}
+
+.main .pic{
+    /* display: flex; */
+    float:left;
+}
+
+.main .pic h1{
+   
+    margin: 20px 10px 0px 10px;
+float: left;
+
+}
+.main .pic p{
+    margin:80px 10px 0px auto;
+   
+}
+.pic img{
+
+    position: relative;
+    border: 2px solid white;
+    border-radius: 120px;
+    height: 100px;
+    width: 100px;
+    float: left;
+    margin: 10px 0px 0px 0px;
+  }
+
+
+.main .form input{
+    border: 1px solid aqua;
+}
+
+.main .form input,label{
+    color:white;
+}
+
+.logo1 img{
+width: 200px;
+height: 200px;
+/* position: relative; */
+/* margin: 100px 100px 100px 500px; */
+}
+.bt{
+    width: 200px;
+    background-color: blue;
+    border: 2px solid blue;
+    border-radius: 10px;
+    color: white;
+    margin: 20px 100px 10px 120px;
+
+}
+
+
+
+.container .clas{
+    margin-top: 100px;
+}
+.clas input{
+    margin: 0px 150px 50px 100px;
+    border-radius: 10px;
+    margin-top: 10px
+
+}
+
+.sideTab ul{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+}
+.mid{
+   margin: 180px 0px 0px 80px;
+}
+.mid .btn1{
+    width: 200px !important;
+     margin: 100px 1px 50px 0px
+}
+
+.mid .btn2{
+   
+   width: 200px !important;
+    margin: 50px 100px 0px 150px
+}
+
+.mid .row input{
+    border: 2px solid rgb(78, 40, 231);
+    background-color: #061921;
+
+}
+.mid .row input::placeholder {
+    color: white;
+    opacity: 1; }
+
+    .card{
+        max-width: 18vmax;
+        border-radius: 100px;
+        background-color: gainsboro;
+    }
+
+
+    .dropzone{
+        display: block;
+        width: 20px;
+        background: rgb(29, 26, 26);
+        color: #fff;
+        padding: 12px;
+        cursor: pointer;
+        border-radius: 100px;
+
+    }
+ .ex{
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background-color:blue;
+    width: 20em;
+    padding: 1em 0;
+    border-radius: 0.3em;
+    margin: 0 auto 1em auto;
+ }
+   .coli #upload-button, .example{
+        display: none;
+    }
+  .ex i{
+    width: 100px;
+ }
+
+ 
+
+      .imageBox{
+        max-width: 10vmax;
+        border: 2px solid red;
+
+      }
+      .coli{
+        background-color:blueviolet;
+        max-width: 560px;
+        height: 300px;
+        padding: 3.12em 1.87em;
+        margin: 0 auto;
+        top: 1em;
+        border: 0.2em dashed blue;
+        color: white;
+      }
+      #error{
+        text-align: center;
+        color: red;
+      }
+      #image-display{
+        margin: 0 auto;
+        width: 90%;
+        position: relative;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 1.25em;
+        flex-wrap: wrap;
+      }
+
+      #image-display figure{
+        width: 45%;
+      }
+
+      #image-display img{
+        width: 100%;
+      }
+
+      #image-display figcaption{
+        font-size: 0.8em;
+        text-align: center;
+        color: brown;
+      }
+
+
+/* 
+
+
+      .landing-page-wrapper .navbar .navbar-menu .navbar-item .theme-toggle input:checked~.toggler {
+        border-color: #797bf2;
+    }
+
+    
+
+
+    .switch-wrapper .night-toggle .toggler {
+    position: relative;
+    display: block;
+    height: 31px;
+    width: 53px;
+    border: 2px solid #671cc9;
+    border-radius: 100px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+span {
+    font-style: inherit;
+    font-weight: inherit;
+}
+ .navbar .navbar-menu .navbar-item.is-theme-toggle {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+       */

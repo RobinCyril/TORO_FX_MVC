@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>torofx - Bootstrap 4 Admin Dashboard Template</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Admin template that can be used to build dashboards for CRM, CMS, etc." />
+    <meta name="author" content="Potenza Global Solutions" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- app favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!-- plugin stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/vendors.css" />
+    <!-- app style -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <div class="loader">
+                <div class="h-100 d-flex justify-content-center">
+                    <div class="align-self-center">
+                        <img src="img/loader/loader.svg" alt="loader">
+                    </div>
+                </div>
+            </div>
+            <!-- end pre-loader -->
+            <!-- begin app-header -->
+            <%- include('../common/header.ejs') %>
+
+                <!-- end app-header -->
+                <!-- begin app-container -->
+                <div class="app-container">
+
+                    <!-- begin app-nabar -->
+                    <%- include('../common/sideNavBar.ejs') %>
+
+                        <!-- end app-navbar -->
+
+                        <!-- begin app-main -->
+                        <div class="app-main" id="main">
+                            <!-- begin container-fluid -->
+                            <div class="container-fluid">
+                                <!-- begin row -->
+                                <div class="row">
+                                    <div class="col-md-12 m-b-30">
+                                        <!-- begin page title -->
+                                        <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                                            <div class="page-title mb-2 mb-sm-0">
+                                                <h1>Task List</h1>
+                                            </div>
+                                            <div class="ml-auto d-flex align-items-center">
+                                                <nav>
+                                                    <ol class="breadcrumb p-0 m-b-0">
+                                                        <li class="breadcrumb-item">
+                                                            <a href="index"><i class="ti ti-home"></i></a>
+                                                        </li>
+                                                        <li class="breadcrumb-item">
+                                                            Pages
+                                                        </li>
+                                                        <li class="breadcrumb-item active text-primary"
+                                                            aria-current="page">Task
+                                                            List</li>
+                                                    </ol>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                        <!-- end page title -->
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <!-- start task list contant -->
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="card card-statistics task-list-contant">
+                                            <div class="card-body  p-0">
+                                                <!-- <table class="table task-table mb-0">
+                                                    <thead class="border-bottom">
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="checkAll">
+                                                                    <label class="form-check-label" for="checkAll">
+                                                                        <span class="font-weight-bold">All
+                                                                            Task</span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <span class="font-weight-bold">Progress</span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="font-weight-bold">Priority</span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="font-weight-bold">Comments</span>
+                                                            </td>
+                                                            <td class="text-right">
+                                                                <div class="dropdown">
+                                                                    <a class="btn font-20" data-toggle="dropdown"
+                                                                        aria-haspopup="true" aria-expanded="false">
+                                                                        <i class="fa fa-gear"></i>
+                                                                    </a>
+                                                                    <div
+                                                                        class="dropdown-menu dropdown-menu-right custom-dropdown p-4">
+                                                                        <a class="dropdown-item"
+                                                                            href="javascript:void(0)"><i
+                                                                                class="ti ti-pencil pr-2 text-primary"></i>
+                                                                            Rename</a>
+                                                                        <a class="dropdown-item"
+                                                                            href="javascript:void(0)"><i
+                                                                                class="ti ti-announcement pr-2 text-info"></i>
+                                                                            Mark as Unread</a>
+                                                                        <a class="dropdown-item"
+                                                                            href="javascript:void(0)"><i
+                                                                                class="ti ti-close pr-2 text-warning"></i>
+                                                                            Close</a>
+                                                                        <a class="dropdown-item"
+                                                                            href="javascript:void(0)"><i
+                                                                                class="ti ti-trash pr-2 text-danger"></i>
+                                                                            Delete</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="text-muted mb-0">
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check">
+                                                                    <label class="form-check-label" for="Check">Change
+                                                                        scss to less</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 99%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-success"></a><span>High
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-success">25</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-success">Completed</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check1">
+                                                                    <label class="form-check-label" for="Check1">Update
+                                                                        all plugins</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 65%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-warning"></a><span>Medium
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-warning ">35</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-warning">In Progress</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check2">
+                                                                    <label class="form-check-label" for="Check2">Create
+                                                                        new intro page</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 35%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-primary"></a><span>Low
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-primary">8</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-primary">On hold</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check3">
+                                                                    <label class="form-check-label" for="Check3">Update
+                                                                        sidebar links</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 50%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-warning"></a><span>Medium
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-warning">10</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-warning">In Progress</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check4">
+                                                                    <label class="form-check-label" for="Check4">Update
+                                                                        color styles</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 60%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-success"></a><span>High
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-success">14</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-success">In Progress</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check5">
+                                                                    <label class="form-check-label" for="Check5">Add new
+                                                                        cards page</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 30%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-primary"></a><span>Low
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-primary">24</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-primary">On hold</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check6">
+                                                                    <label class="form-check-label" for="Check6">Add new
+                                                                        charts</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 95%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-success"></a><span>High
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-success">4</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-success">Completed</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check7">
+                                                                    <label class="form-check-label" for="Check7">Update
+                                                                        google fonts</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 55%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-warning"></a><span>Medium
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-warning">22</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-warning">In Progress</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check8">
+                                                                    <label class="form-check-label" for="Check8">Change
+                                                                        font style</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 97%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-primary"></a><span>Low
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-primary">5</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-primary">Completed</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check9">
+                                                                    <label class="form-check-label" for="Check9">Change
+                                                                        variable names</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 75%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-success"></a><span>High
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-success">18</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-success">Completed</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="Check10">
+                                                                    <label class="form-check-label" for="Check10">Update
+                                                                        package.json</label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="w-30">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+                                                                        role="progressbar" style="width: 75%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)"
+                                                                    class="dot bg-warning"></a><span>Medium
+                                                                    Priority</span></td>
+                                                            <td class="task-table-td">
+                                                                <div class="chat">
+                                                                    <i class="ti ti-comments"></i><span
+                                                                        class="badge badge-warning">4</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-right text-warning">In Progress</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table> -->
+                                                <ul id="board-list"></ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end task list contant -->
+                            </div>
+                            <!-- end container-fluid -->
+                        </div>
+                        <!-- end app-main -->
+                </div>
+                <!-- end app-container -->
+                <!-- begin footer -->
+                <%- include('../common/footer.ejs') %>
+
+                    <!-- end footer -->
+        </div>
+        <!-- end app-wrap -->
+    </div>
+    <!-- end app -->
+
+    <!-- plugins -->
+    <script src="js/vendors.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const key = '87dc01e7bac2ae2213f698c00e503683';
+        const token = 'ATTAa4fe7b32f9583c67521512188d3f55aca7807bd57df63732e93ea4a201655fa55F7A417D';
+        const memberId = 'robincyril1'; // To retrieve boards associated with the authenticated user
+        const id = '6422d47cb6a39c882ea9aecd';
+        
+        const url = `https://api.trello.com/1/members/${memberId}/boards?key=${key}&token=${token}`;
+
+        axios.get(url)
+            .then(response => {
+                const boards = response.data;
+                const boardList = document.getElementById('board-list');
+
+                boards.forEach(board => {
+                    const boardName = board.name;
+                    const listItem = document.createElement('li');
+                    listItem.textContent = boardName;
+                    boardList.appendChild(listItem);
+                }); }) 
+
+                boards.forEach(board => {
+                    const boardName = board.name;
+                    const tasksUrl = `https://api.trello.com/1/boards/${board.id}/cards?key=${key}&token=${token}`;
+
+                    axios.get(tasksUrl)
+                        .then(response => {
+                            const tasks = response.data;
+                            const boardList = document.createElement('ul');
+                            const boardItem = document.createElement('li');
+                            boardItem.textContent = boardName;
+                            boardList.appendChild(boardItem);
+
+                            tasks.forEach(task => {
+                                const taskName = task.name;
+                                const taskItem = document.createElement('li');
+                                taskItem.textContent = taskName;
+                                boardList.appendChild(taskItem);
+                            });
+
+                        })
+                        .catch(error => {
+                            console.error('Failed to retrieve boards:', error);
+                        });
+                    })
+    </script>
+
+
+    <!-- custom app -->
+    <script src="js/app.js"></script>
+</body>
+
+
+</html>

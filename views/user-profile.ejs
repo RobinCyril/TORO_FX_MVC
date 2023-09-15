@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>torofx - Bootstrap 4 Admin Dashboard Template</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      name="description"
+      content="Admin template that can be used to build dashboards for CRM, CMS, etc."
+    />
+    <meta name="author" content="appsImagica" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- app favicon -->
+    <link rel="shortcut icon" href="/img/favicon.webp" />
+    <!-- google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+      rel="stylesheet"
+    />
+    <!-- plugin stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/css/vendors.css" />
+    <!-- app style -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="/css/dash.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/toggle.css" />
+    <style>
+      .container-fluid .column .grid-item {
+        text-align: center;
+
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        display: inline-block;
+        /* width: 60%; */
+        max-height: 100%;
+        /* margin-left: 200px; */
+        /* width: 100%; */
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 6px;
+        border: 1px solid #e5e5e5;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+      .container-fluid .column .grid-item .avatar1 {
+        width: 50px;
+        border-radius: 25px;
+      }
+      .container-fluid .column .grid-item .avatar {
+        border-radius: 50px;
+      }
+
+      .button {
+        margin-top: 10px;
+        padding: 8px 22px 8px 22px;
+        height: 38px;
+        line-height: 1.1;
+        font-size: 0.95rem;
+        font-family: "Roboto", sans-serif;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border-radius: 10px;
+      }
+      .container-fluid .form {
+        float: right;
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- begin app -->
+    <div class="app">
+      <!-- begin app-wrap -->
+      <div class="app-wrap">
+        <!-- begin pre-loader -->
+        <div class="loader">
+          <div class="h-100 d-flex justify-content-center">
+            <div class="align-self-center">
+              <img src="/img/loader/loader.svg" alt="loader" />
+            </div>
+          </div>
+        </div>
+        <!-- end pre-loader -->
+        <!-- begin app-header -->
+       
+        <%- include('../common/header.ejs') %>
+
+        <!-- end app-header -->
+        <!-- begin app-container -->
+        <div class="app-container">
+          <!-- begin app-nabar -->
+
+          <%- include('../common/sideNavBar.ejs') %>
+
+          <!-- end app-navbar -->
+
+          <!-- begin app-main -->
+          <div class="app-main" id="main">
+            <!-- begin container -->
+            <div class="container-fluid">
+              <!-- begin row -->
+              <div class="row">
+                <div class="col-12 m-b-30">
+                  <!-- begin page title -->
+                  <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                    <div class="page-title mb-2 mb-sm-0">
+                      <h1>USERS</h1>
+                    </div>
+                    <div class="ml-auto d-flex align-items-center">
+                      <nav>
+                        <ol class="breadcrumb p-0 m-b-0">
+                          <li class="breadcrumb-item">
+                            <a href="index"><i class="ti ti-home"></i></a>
+                          </li>
+                          <li
+                            class="breadcrumb-item active text-primary"
+                            aria-current="page"
+                          >
+                            USERS
+                          </li>
+                        </ol>
+                      </nav>
+                    </div>
+                  </div>
+                  <!-- end page title -->
+                </div>
+              </div>
+              <!-- end row -->
+              <div
+                class="container"
+                style="display: flex; justify-content: center"
+              >
+                <div class="row">
+                  <!--Grid item-->
+                  <div class="col-md-6">
+                    <div class="column is-3">
+                      <div class="grid-item">
+                        <div class="h-avatar is-big">   
+                          <img
+                            class="avatar"
+                            src="/user/<%= data.photo %>"
+                            alt=""
+                            style="width: 70px; height: 70px;"
+                          />
+                          <img
+                            class="badge"
+                            src="https://via.placeholder.com/150x150"
+                            data-demo-src="assets/img/icons/stacks/photoshop.svg"
+                            alt=""
+                          />
+                        </div>
+                        <h3 class="dark-inverted" data-filter-match>
+                         <%= data.username %>
+                        </h3>
+                        <p data-filter-match><%= data.pro %></p>
+                        <div class="people">
+                          <div class="h-avatar is-small">
+                            <span
+                              class="avatar is-fake is-success"
+                              data-user-popover="37"
+                            >
+                              <span>AT</span>
+                         <%= data.location %>
+
+                            </span>
+                          </div>
+                          <div class="h-avatar is-small">
+                            <img
+                              class="avatar1"
+                              src="/user/<%= data.photo %>"
+                              data-demo-src="assets/img/avatars/photos/23.jpg"
+                              alt=""
+                              data-user-popover="21"
+                            />
+                          </div>
+                        </div>
+                        <div class="buttons">
+                          <button class="button h-button is-dark-outlined">
+                            <span class="icon">
+                              <i data-feather="user"></i>
+                            </span>
+                            <span>Profile</span>
+                          </button>
+                          <button class="button h-button is-dark-outlined">
+                            <span class="icon">
+                              <i data-feather="message-circle"></i>
+                            </span>
+                           <a href="/delete/:id"><span>Delete</span></a> 
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Grid item-->
+
+                  <!-- Form item -->
+
+                 
+                  <div class="col-md-6" style="margin: 10px 0px 10px 0px">
+                    <form id="registrationForm" action="/user-profile" method="post" enctype="multipart/form-data">
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"
+                          >Username</span
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="username"
+                          value="<%= data.username %>"
+                          aria-describedby="basic-addon1"
+                        />
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2"
+                          >Status</span
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="status"
+                          value="<%= data.status %>"
+                          aria-describedby="basic-addon2"
+                        />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2"
+                          >Program</span
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="program"
+                          value="<%= data.program%>"
+                          placeholder="Status"
+                          aria-describedby="basic-addon2"
+                        />
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3"
+                          >Email</span
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="email"
+                          value="<%= data.email %>"
+                          aria-describedby="basic-addon3"
+                        />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3"
+                          >Profesion</span
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="pro"
+                          value="<%= data.pro%>"
+                          aria-describedby="basic-addon3"
+                        />
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2"
+                          >Mobile</span
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="mob"
+                          value="<%= data.mob %>"
+                          aria-describedby="basic-addon2"
+                        />
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Location</span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="location"
+                          value="<%= data.location %>"
+                        />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">@</span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="achievement"
+                          placeholder="Achievement"
+                        />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">@</span>
+                        <input
+                          type="file"
+                          class="form-control"
+                          name="photo"
+                        />
+                      </div>
+
+                      <button
+                        class="btn-primary"
+                        type="submit"
+                        style="
+                          border-radius: 10px;
+                          padding: 10px 10px 10px 10px;
+                        "
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+
+              <!-- Form item -->
+            </div>
+            <!-- end container-fluid -->
+          </div>
+
+          <!-- end app-main -->
+        </div>
+        <!-- end app-container -->
+        <!-- begin footer -->
+        <%- include('../common/footer.ejs') %>
+
+        <!-- end footer -->
+      </div>
+      <!-- end app-wrap -->
+    </div>
+    <!-- end app -->
+
+    <!-- plugins -->
+    <script src="/js/vendors.js"></script>
+
+    <!-- custom app -->
+    <script src="/js/app.js"></script>
+    <script src="/js/javas.js"></script>
+    <script src="/js/toggle.js"></script>
+    <script>
+          $(document).ready(function () {
+        $(".clickable-row").on("click", function () {
+          window.location = $(this).data("href");
+        });
+      });
+    </script>
+     <script>
+      // Function to handle the form submission
+      document.getElementById("registrationForm").addEventListener("submit", async function(event) {
+          event.preventDefault();
+  
+          // Send the form data to the server using fetch or any other method
+          try {
+              const formData = new FormData(this);
+              const response = await fetch("/user-profile", {
+                  method: "POST",
+                  body: formData,
+              });
+  
+              if (response.ok) {
+                  // Registration was successful, display the popup message
+                  alert("Registration successful");
+                  // You can also redirect the user to another page or perform any other action here.
+              } else {
+                  // Handle errors if registration failed
+                  console.error("Registration failed:", response.statusText);
+              }
+          } catch (err) {
+              console.error("An error occurred:", err);
+          }
+      });
+  </script>
+  
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <title>TOROFX - Bootstrap 4 Admin Dashboard Template</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="Admin template that can be used to build dashboards for CRM, CMS, etc." />
+  <meta name="author" content="Potenza Global Solutions" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- app favicon -->
+  <link rel="shortcut icon" href="img/favicon.webp">
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <!-- plugin stylesheets -->
+  <link rel="stylesheet" type="text/css" href="/css/vendors.css" />
+  <!-- app style -->
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+
+<body>
+  <!-- begin app -->
+  <div class="app">
+    <!-- begin app-wrap -->
+    <div class="app-wrap">
+      <!-- begin pre-loader -->
+      <div class="loader">
+        <div class="h-100 d-flex justify-content-center">
+          <div class="align-self-center">
+            <img src="/img/loader/loader.svg" alt="loader">
+          </div>
+        </div>
+      </div>
+      <!-- end pre-loader -->
+      <!-- begin app-header -->
+      <%- include('../dist/common/header.ejs') %>
+
+        <!-- end app-header -->
+        <!-- begin app-container -->
+        <div class="app-container">
+          <!-- begin app-nabar -->
+          <%- include('../dist/common/sideNavBar.ejs') %>
+
+            <!-- end app-navbar -->
+            <!-- begin app-main -->
+            <div class="app-main" id="main">
+              <!-- begin container-fluid -->
+              <div class="container-fluid">
+
+
+                <!-- start Liberary -->
+                <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                  <div class="page-title mb-2 mb-sm-0">
+                    <h1>Main Programs</h1>
+                  </div>
+                  <div class="ml-auto d-flex align-items-center">
+                    <nav>
+                      <ol class="breadcrumb p-0 m-b-0">
+                        <li class="breadcrumb-item">
+                          <a href="/index">
+                            <i class="ti ti-home"></i>
+                          </a>
+                        </li>
+                        <li aria-current="page" class="breadcrumb-item active text-primary">
+                          Programs List
+                        </li>
+                        <a href="/course-upload" type="btn-success"
+                          style="background-color: white; border-radius: 10px; margin-top: 50px; padding: 20px; position: sticky;">+
+                          Add
+                          Courses</a>
+                      </ol>
+                    </nav>
+                  </div>
+                </div>
+                <div class="col-lg-12 mt-5">
+                  <% if(data.length>0) { %>
+                    <table class="table table-dark table-striped" id="course">
+                      <thead>
+                        <tr>
+                          <th style="color:white">#</th>
+                          <th style="color:white">Program Name</th>
+                          <th style="color:white">fees</th>
+                          <th style="color:white">program</th>
+                          <th style="color:white">Duration</th>
+                          <th style="color:white">Thumbnail</th>
+                          <th style="color:white">Action</th>
+
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(var i=0;i<data.length; i++) { %>
+                          <tr class='clickable-row' data-href='course-chapter/<%= data[i]._id %>' style=" cursor: pointer;">
+                            <td>
+                              <%= i+1 %>
+                            </td>
+
+                            <td>
+                              <%= data[i].file_name %>
+                            </td>
+                            <td>
+                              <%= data[i].price %>
+                            </td>
+
+                            <!-- <td>
+                              <embed src="course-list/<%= data[i].program %>" width="150px" height="160px" />
+                            </td> -->
+                            <td>
+                              <%= data[i].duration %>
+                            </td>
+
+                            <td>
+                              <img style="height: 100px; width: 100px;" src="course-list/<%= data[i].Photo %>">
+
+                            </td>
+
+
+                            <td>
+                              <a href="/course-edit/<%= data[i]._id%>"><i class="nav-icon ti ti-pencil-alt"> </i></a>
+                              
+                            </td>
+
+                            <td>
+                                <a href="/delete/V1/<%= data[i]._id %>"><i class="nav-icon ti ti-trash"></i></i></a>
+
+                            </td>
+
+                            <% } %>
+                      </tbody>
+
+                    </table>
+
+
+                    <% } else { %>
+                      No record Found
+                      <% } %>
+                </div>
+                <!-- end page title -->
+              </div>
+            </div>
+            <!-- end row -->
+
+
+
+
+
+
+            <!-- end app-container -->
+            <!-- begin footer -->
+            <%- include('../dist/common/footer.ejs') %>
+
+              <!-- end footer -->
+        </div>
+        <!-- end app-wrap -->
+    </div>
+    <!-- end app -->
+
+    <!-- plugins -->
+    <script src="/js/vendors.js"></script>
+
+    <!-- custom app -->
+    <script src="/js/app.js"></script>
+    <script>
+      jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+          window.location = $(this).data("href");
+        });
+      });
+    </script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src=" https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        new DataTable('#course');
+    </script>
+</body>
+
+
+</html>
