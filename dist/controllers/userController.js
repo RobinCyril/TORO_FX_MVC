@@ -32,12 +32,20 @@ var __awaiter =
     });
   };
 // const router =express.Router();
+import dotenv from 'dotenv';
+dotenv.config({ path: "./.env" });
+import Nodemailer from 'nodemailer';
 import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel.js"; // Import your user model here
 import { user } from "../model/user.js";
 import { Chapter } from "../model/chapter.js";
-import {questionModel} from '../model/question.js'
+import { questionModel } from "../model/question.js";
 import multer from "multer";
+import jwt from 'jsonwebtoken';
+
+const PORT = process.env.PORT;
+const secret = "HIIAMROBINANDIAMAWEBDEVELOPERINAPPSIMAGICALLP";
+console.log(secret);
 // Registration
 
 export const auth_register = (req, res) =>
@@ -307,5 +315,116 @@ export const add_new_assignment = async (req, res) => {
       success: false,
       err: err,
     });
+  }
+};
+
+// --------------------------Logout-------------------------------
+export const logout = (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
+};
+
+export const login = (req, res) => {
+  res.render("login");
+};
+
+export const  get_login_by_email=(req, res) => {
+  res.render("login-by-email");
+};
+
+export const login_by_email= async (req, res) => {
+  try {
+    const userEmail = req.body.email;
+    const userData = await userModel.findOne({ email: userEmail }).exec();
+
+    if (userData) {
+      const token = generateJwtToken(userData.id);
+
+      console.log(token);
+
+      const newEmail = await userModel.updateOne(
+        { email: userEmail },
+        { $set: { token: token } }
+      );
+
+      res.status(200).send({
+        success: true,
+        msg: "link has been sent to your email, kindly click on the link to continue logging in...",
+      });
+
+      const transporter = Nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: "robin.cyril@appsimagica.com",
+          pass: "luohzfqmgbxnbmuh", // Update this with your Gmail password
+        },
+      });
+
+      const mailOptions = {
+        to: userEmail,
+        subject: `Login link`,
+        text: `Click the following link to access your account: http://localhost:8000/verify?token=${token}&userID=${userData.id}`,
+        html: `<p>Click the following link to access your account: http://localhost:8000/verify?token=${token}&userID=${userData.id}</p>`,
+      };
+
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          console.log(err);
+          res.send("Error sending email");
+        } else {
+          console.log(info);
+          res.send("Link sent");
+        }
+      });
+    } else {
+      res.status(200).send({ msg: "Email does not exist" });
+    }
+  } catch (error) {
+    res.status(400).send({ success: false, msg: error.message });
+  }
+};
+
+function generateJwtToken(userID) {
+  const token = jwt.sign({ userID: userID }, secret, {
+    expiresIn: "1h",
+  });
+  console.log(userID);
+  return token;
+}
+
+
+export const  verify_link= async (req, res) => {
+  const token = req.query.token;
+  console.log("Received token:", token);
+  try {
+    const decodedToken = jwt.verify(token, secret);
+    console.log("Decoded token:", decodedToken);
+
+    if (decodedToken && decodedToken.userID) {
+      const user = await userModel.findById(decodedToken.userID).exec();
+      console.log("Found user:", user);
+      req.user = user;
+      console.log("Req User:", req.user);
+
+      if (user) {
+        // res.redirect('/login')
+        console.log(`Welcome ${user.username}`);
+        // res.send(`Welcome ${user.username}`);
+        res.render("index", { user: user });
+      } else {
+        console.log("User not found");
+        res.sendStatus(404); // User not found
+      }
+    } else {
+      console.log("Invalid token or missing userID");
+      res.sendStatus(401); // Invalid token or missing userID
+    }
+  } catch (error) {
+    console.log("Token verification error:", error.message);
+    res.sendStatus(401); // Invalid token
   }
 };

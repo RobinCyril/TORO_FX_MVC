@@ -17,7 +17,7 @@ app.use(express.json());
 // Determine the current working directory and construct the path to the "assets" directory
 const currentWorkingDirectory = process.cwd();
 const staticPath = path.join(currentWorkingDirectory, 'assets');
-
+// console.log('Static path:', staticPath);
 app.use(express.static(staticPath));
 
 // Create a new Server instance with the http server

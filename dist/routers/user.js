@@ -19,6 +19,11 @@ import {
   add_new_user,
   get_new_assignment,
   add_new_assignment,
+  logout,
+  login,
+  get_login_by_email,
+  login_by_email,
+  verify_link
 } from "../controllers/userController.js";
 
 import {
@@ -63,8 +68,16 @@ router.post(
   }
 );
 
+router.get('/logout',logout);
+
+router.get('/login',login);
+
+router.get('/login-by-email', get_login_by_email);
+router.post('/login-by-email',login_by_email);
+router.post('/verify',verify_link);
 //------------Get API for auth_login page --------------------------
 router.get("/index", index);
+
 
 //------------Get API for user/subsciber page --------------------------
 router.get("/subscribers", subscribers);
