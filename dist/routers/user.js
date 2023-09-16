@@ -8,7 +8,7 @@ import passport from 'passport';
 
 import { auth_register, get_auth_register, get_auth_login,
   calculator,index,subscribers,support, app_chat,Charts,
-  get_static_chart,admin_profile,update_admin_profile,} from '../controllers/userController.js';
+  get_static_chart,admin_profile,update_admin_profile,get_user_profile,add_new_user} from '../controllers/userController.js';
 
 import {category_upload,setting, create_category,get_course,
   get_course_upload, course_upload, get_course_edit, get_course_chapter
@@ -97,6 +97,9 @@ router.get('/assistant',get_assistant);
 router.get('/admin-profile',admin_profile);
 router.post('/update/v1/:id',update_admin_profile);
 
+// ----------------------------User/Subscriber Profile and Edit----------------
+router.get('/user-profile/:id',get_user_profile);
+router.post('/user-profile',add_new_user);
 // ----------------------------Edit Chapter----------------
 router.get('/chapter-edit/:id',get_chapter_edit);
 router.post('/update-selected-chapters',update_selected_chapter);

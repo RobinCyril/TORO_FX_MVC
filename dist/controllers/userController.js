@@ -176,5 +176,87 @@ export const update_admin_profile = async (req, res) => {
   }
 };
 // Profile update ends
+//------------Post API for Adding User--------------------------
+
+export const get_user_profile= (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  user
+    .findById({ _id: id })
+    .then((data) => {
+      res.render("user-profile", { data: data }); // Include the data in the render call
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("An error occurred");
+    });
+};
 
 
+const fileFilter2 = (req, file, cb) => {
+  const allowedFileTypes = ["image/png", "image/jpg", "image/jpeg"];
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const storage4 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./assets/user");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+export const add_new_user = async (req, res) => {
+  try {
+    const upload4 = multer({
+      storage: storage4,
+      fileFilter: fileFilter2,
+    }).single("photo");
+
+    upload4(req, res, async (err) => {
+      if (err) {
+        console.error("Error occurred while uploading file:", err);
+        return res.status(400).json({ err: "File upload error" });
+      }
+
+      const { username, email, mob, status, achievement, location, pro, program } = req.body;
+      const photo = req.file;
+      console.log("Received data from the form:", req.body);
+
+      // Rename the variable to avoid the naming conflict
+      const existingUser = await user.findOne({ email: email });
+      console.log("User found in the database:", existingUser);
+
+      if (existingUser) {
+        console.log("User already exists!");
+        // return res.status(400).send("User already exists!");
+        return res.render("user-profile.ejs");
+      }
+
+      const register1 = new user({
+        status,
+        pro,
+        program,
+        email,
+        username,
+        location,
+        mob,
+        achievement,
+        photo: photo ? photo.filename : null,
+      });
+
+      await register1.save();
+
+      console.log("User registered successfully!");
+      return res.status(200).json({ message: "Registration successful" });
+    });
+  } catch (err) {
+    console.error("Error occurred while processing registration:", err);
+    return res.status(500).json({ err: "Internal server error" });
+  }
+};
