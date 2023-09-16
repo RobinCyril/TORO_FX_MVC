@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
-url = process.env.DATABASE;
+import mongoose from "mongoose";
+// const dotenv = require("dotenv");
+// dotenv.config({ path: "./config.env" });
+// url = process.env.DATABASE;
 
-mongoose.connect(url, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
+// mongoose.connect(url, {
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true,
+// });
 
 const userSchema = mongoose.Schema({
   question: {
@@ -36,5 +36,4 @@ const userSchema = mongoose.Schema({
   ch_id:String
 });
 
-const question = mongoose.model("question", userSchema);
-module.exports = question;
+export const questionModel = mongoose.model("question", userSchema);

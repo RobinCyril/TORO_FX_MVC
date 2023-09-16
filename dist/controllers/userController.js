@@ -36,6 +36,7 @@ import bcrypt from "bcrypt";
 import { userModel } from "../model/userModel.js"; // Import your user model here
 import { user } from "../model/user.js";
 import { Chapter } from "../model/chapter.js";
+import {questionModel} from '../model/question.js'
 import multer from "multer";
 // Registration
 
@@ -178,7 +179,7 @@ export const update_admin_profile = async (req, res) => {
 // Profile update ends
 //------------Post API for Adding User--------------------------
 
-export const get_user_profile= (req, res) => {
+export const get_user_profile = (req, res) => {
   const id = req.params.id;
   console.log(id);
   user
@@ -191,7 +192,6 @@ export const get_user_profile= (req, res) => {
       res.status(500).send("An error occurred");
     });
 };
-
 
 const fileFilter2 = (req, file, cb) => {
   const allowedFileTypes = ["image/png", "image/jpg", "image/jpeg"];
@@ -224,7 +224,16 @@ export const add_new_user = async (req, res) => {
         return res.status(400).json({ err: "File upload error" });
       }
 
-      const { username, email, mob, status, achievement, location, pro, program } = req.body;
+      const {
+        username,
+        email,
+        mob,
+        status,
+        achievement,
+        location,
+        pro,
+        program,
+      } = req.body;
       const photo = req.file;
       console.log("Received data from the form:", req.body);
 
@@ -258,5 +267,45 @@ export const add_new_user = async (req, res) => {
   } catch (err) {
     console.error("Error occurred while processing registration:", err);
     return res.status(500).json({ err: "Internal server error" });
+  }
+};
+
+export const get_new_assignment = (req, res) => {
+  const id = req.params.id;
+  Chapter.findById(id)
+    .then((data) => res.render("chapter-assignment", { data: data }))
+    .catch((err) => console.log(err));
+};
+
+export const add_new_assignment = async (req, res) => {
+  const ch_id = req.params.id;
+
+  try {
+    const quizAnswer = {
+      question: req.body.question,
+      option1: req.body.option1,
+      option2: req.body.option2,
+      option3: req.body.option3,
+      option4: req.body.option4,
+      correctAnswer: req.body.correctAnswer,
+      ch_id: ch_id,
+    };
+    const quiz = await questionModel(quizAnswer);
+    quiz
+      .save()
+      .then(
+        () =>
+          res
+            .status(200)
+            .json({ message: "succesfully uploaded the questions" }),
+        res.redirect("/course-page")
+      )
+      .catch((err) => console.log(err));
+  } catch (err) {
+    console.log("internal err");
+    res.status(500).json({
+      success: false,
+      err: err,
+    });
   }
 };
