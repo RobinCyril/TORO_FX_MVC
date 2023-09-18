@@ -75,70 +75,83 @@ export const get_course_upload = (req, res) => {
 
 //------------Post  API for adding course --------------------------
 
-const FileFilter1 = (req, file, cb) => {
-  const allowedFileTypes = [
-    "application/pdf",
-    "image/jpg",
-    "image/jpeg",
-    "image/png",
-    // "video/mp4",
-  ];
-  if (allowedFileTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(null, false);
+
+
+
+
+
+export const course_upload = async (req, res) => {
+  try {
+    const storage1 = multer.diskStorage({
+      destination: function (req, file, callback) {
+        callback(null, "./assets/course-list");
+      },
+      filename: function (req, file, callback) {
+        callback(null, file.originalname);
+      }
+    });
+
+    const FileFilter1 = (req, file, cb) => {
+      const allowedFileTypes = [
+        "application/pdf",
+        "image/jpg",
+        "image/jpeg",
+        "image/png",
+        // "video/mp4",
+      ];
+      if (allowedFileTypes.includes(file.mimetype)) {
+        cb(null, true);
+      } else {
+        cb(null, false);
+      }
+    };
+
+    const upload1 = multer({ storage: storage1, fileFilter: FileFilter1 }).single('photo');
+
+    // Use upload1 middleware to handle the file upload
+    upload1(req, res, async (err) => {
+      if (err) {
+        console.error("Error occurred while uploading file:", err);
+        return res.status(400).json({ err: "File upload error" });
+      }
+
+      const { file, body } = req;
+
+      // Check if a file is uploaded
+      if (!file) {
+        return res.status(400).json({ error: 'A photo is required.' });
+      }
+
+      const { file_name, price, duration } = body;
+
+      // Access the file path for further processing
+      const photoPath = path.basename(file.path);
+
+      // Create a new Course instance
+      const courseMain = new Course({
+        file_name,
+        price,
+        duration,
+        Photo: photoPath, // Assuming "Photo" is the field name in your Course model
+      });
+
+      // Save the course to the database
+      await courseMain.save();
+
+      console.log('Successfully added the program.');
+      res.redirect('/course-page');
+    });
+  } catch (err) {
+    console.error('Error occurred while uploading and saving the course:', err);
+    res.status(500).json({ error: 'An error occurred while saving the course.' });
   }
 };
 
-const storage1 = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, "./assets/course-list");
-  },
-  filename: function (req, file, callback) {
-    callback(null, file.originalname);
-  },
-});
 
-const upload1 = multer({ storage: storage1, fileFilter: FileFilter1 });
 
-export const course_upload = upload1.fields([{ name: "photo" }], (req, res) => {
-  const { file_name, price, duration } = req.body;
-  console.log("started");
-  // Access the uploaded files from the request object
-  const files = req.files;
-  console.log("Files:", files);
 
-  // Check if the files are uploaded and available in the files object
-  if (!files || !files.photo) {
-    res.status(400).json({ error: "A photo is required." });
-    return;
-  }
 
-  // Access the file paths for further processing
-  const photoPath = path.basename(files.photo[0].path);
 
-  // Assuming you have a Mongoose model called `library` for saving the file paths
-  const courseMain = new Course({
-    file_name,
-    price,
-    duration,
-    Photo: photoPath,
-  });
-
-  courseMain
-    .save()
-    .then(() => {
-      console.log("Successfully added the program..");
-      // res.status(200).json({ message: "program Added" }),
-      res.redirect("/course-page");
-    })
-    .catch((err) => {
-      console.log(err);
-      res
-        .status(500)
-        .json({ error: "An error occurred while saving the course." });
-    });
-});
 
 // Course ends
 //------------Get API for adding course --------------------------
@@ -174,7 +187,7 @@ export const get_course_chapter = (req, res) => {
   ])
     .then((data) => {
       if (!data || data.length === 0) {
-        res.redirect(`/course-chapter-upload/${courseId}`);
+        res.redirect(`/add_chapter/${courseId}`);
         console.log(`No chapters found for courseId: ${courseId}`);
         // return res.status(404).send("Chapters not found");
       }
@@ -186,6 +199,81 @@ export const get_course_chapter = (req, res) => {
       res.status(500).send("Internal Server Error");
     });
 };
+
+
+export const add_chapter = async (req, res) => {
+  try {
+    const Filter = (req, file, cb) => {
+      const allowedFileTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/svg",
+        "video/mp4",
+      ];
+      if (allowedFileTypes.includes(file.mimetype)) {
+        cb(null, true);
+      } else {
+        cb(null, false);
+      }
+    };
+
+    const storage2 = multer.diskStorage({
+      destination: function (req, file, callback) {
+        callback(null, "./assets/chapters");
+      },
+      filename: function (req, file, callback) {
+        callback(null, file.originalname);
+      },
+    });
+
+    const upload2 = multer({ storage: storage2, fileFilter: Filter }).fields([
+      { name: "Photo" },
+      { name: "video" },
+    ]);
+
+    upload2(req, res, async (err) => {
+      if (err) {
+        console.error("Error occurred while uploading file:", err);
+        return res.status(400).json({ err: "File upload error" });
+      }
+
+      const { files, body } = req;
+
+      // Check if required files are uploaded
+      if (!files || !files.Photo || !files.video) {
+        return res.status(400).json({ error: 'Required files are empty' });
+      }
+
+      const cid = req.params.cid;
+      const { chapter_name, program } = body;
+
+      const photoPath = path.basename(files.Photo[0].path);
+      const videoPath = path.basename(files.video[0].path);
+
+      const chpater_upload = new Chapter({
+        chapter_name,
+        program,
+        Photo: photoPath,
+        video: videoPath,
+        cid: cid,
+      });
+
+      chpater_upload
+        .save()
+        .then(() => {
+          console.log("Successfully uploaded the chapter.");
+          res.status(200).json({ message: "Successfully uploaded the chapter" });
+          res.redirect("/course-page");
+        })
+        .catch((err) => console.error(err));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
 
 export const final_exam = (req, res) => {
   userModel.find().then((data) => {

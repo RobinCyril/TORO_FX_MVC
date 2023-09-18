@@ -9,6 +9,7 @@ import path from 'path';
 import passport from 'passport';
 import expresSession from 'express-session';
 import { Server } from "socket.io"; // Import the Server class from socket.io
+import('./passport-setup.js');
 
 // Middleware order: bodyParser, static, express-session, passport
 app.use(bodyParser.urlencoded({ extended: false }));    
@@ -51,30 +52,6 @@ import { initializingPassport } from "./passportConfig.js";
 initializingPassport(passport); 
 
 
-
-// Node server will handle socet.io connection
-
-// const users = {};
-// io.on("connection", (socket) => {
-//   socket.on("new-user-joined", (name) => {
-//     console.log("New User:", name);
-//     users[socket.id] = name;
-//     socket.broadcast.emit("user-joined", name);
-//   });
-
-//   socket.on("send", (message) => {
-//     socket.broadcast.emit("receive", {
-//       message: message,
-//       name: users[socket.id],
-//     });
-//   });
-//   socket.on("disconnect", (message) => {
-//     socket.broadcast.emit("left", users[socket.id]);
-//     delete users[socket.id];
-//   });
-// });
-
-// End of Chat Server
 
 app.use('/', router);
 

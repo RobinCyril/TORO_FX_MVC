@@ -42,6 +42,7 @@ import { Chapter } from "../model/chapter.js";
 import { questionModel } from "../model/question.js";
 import multer from "multer";
 import jwt from 'jsonwebtoken';
+import passport from 'passport';
 
 const PORT = process.env.PORT;
 const secret = "HIIAMROBINANDIAMAWEBDEVELOPERINAPPSIMAGICALLP";
@@ -428,3 +429,9 @@ export const  verify_link= async (req, res) => {
     res.sendStatus(401); // Invalid token
   }
 };
+
+
+
+
+
+

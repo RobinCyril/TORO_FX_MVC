@@ -2,6 +2,7 @@ import express from "express";
 // user Passport middleware
 import passport from "passport";
 
+
 import {
   auth_register,
   get_auth_register,
@@ -23,7 +24,8 @@ import {
   login,
   get_login_by_email,
   login_by_email,
-  verify_link
+  verify_link,
+ 
 } from "../controllers/userController.js";
 
 import {
@@ -32,7 +34,7 @@ import {
   create_category,
   get_course,
   get_course_upload,
-  course_upload,
+  course_upload, 
   get_course_edit,
   get_course_chapter,
   final_exam,
@@ -41,6 +43,7 @@ import {
   get_chapter_edit,
   update_selected_chapter,
   get_add_chapter,
+  add_chapter
 } from "../controllers/courseController.js";
 
 import {
@@ -74,7 +77,26 @@ router.get('/login',login);
 
 router.get('/login-by-email', get_login_by_email);
 router.post('/login-by-email',login_by_email);
-router.post('/verify',verify_link);
+router.get('/verify',verify_link);
+
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    successRedirect: "/admin-profile",
+  }),
+  function (req, res) {
+    // Successful authentication, redirect to the desired page
+    // res.redirect("/index");
+  }
+);
+
 //------------Get API for auth_login page --------------------------
 router.get("/index", index);
 
@@ -144,5 +166,6 @@ router.post("/user-profile", add_new_user);
 router.get("/chapter-edit/:id", get_chapter_edit);
 router.post("/update-selected-chapters", update_selected_chapter);
 router.get("/add_chapter/:cid", get_add_chapter);
+router.post('/add_chapter/:cid',add_chapter);
 
 export default router;
